@@ -1,61 +1,72 @@
 import { useEffect, useState } from 'react';
 import UserCard from '../components/UserCard';
-import './HomePage.css'
+import './HomePage.css';
 import NavBar from '../components/NavBar';
-import type {IUserProps}  from "../utils/types";
+import type { IUserProps } from "../utils/types";
+import { fetchUsers } from '../utils/fetchUsers';
+import Loader from '../components/Loader';
+import { useFavorites } from '../hooks/useFavorites';
 
+const usersPerPage = 20;
 
-const usersPerPage: number = 20;
-
-export default function HomePage() {
+const HomePage = () => {
   const [users, setUsers] = useState<IUserProps[]>([]);
-  const [error, setError] = useState<string>('');
-  const [since, setSince] = useState<number>(0);
+  const [error, setError] = useState('');
+  const [since, setSince] = useState(0);
+  const [loading, setLoading] = useState(false);
+
+  const { isFavorite, toggleFavorite } = useFavorites();
 
   useEffect(() => {
-    const fetchUsers = async () => {
+    const getUsers = async () => {
+      setLoading(true);
       try {
-        const res = await fetch(`https://api.github.com/users?since=${since}&per_page=${usersPerPage}`);
-        if (!res.ok) throw new Error('Failed to fetch users');
-        const data = await res.json();
+        const data = await fetchUsers(since, usersPerPage);
         setUsers(data);
       } catch (err: any) {
-        setError(err.message);
-        console.log(error);
+        setError(err.message ?? "Something went wrong");
+      } finally {
+        setLoading(false);
       }
     };
-
-    fetchUsers();
+    getUsers();
   }, [since]);
 
-  const handleNext = (): void => {
+  const handleNext = () => {
     if (users.length > 0) {
       setSince(since + usersPerPage);
     }
   };
 
   const handlePrev = () => {
-    setSince(since - usersPerPage);
+    setSince(Math.max(0, since - usersPerPage));
   };
 
+  if (loading) return <Loader />;
+  if (error) return <h1>{error}</h1>;
+
   return (
-      <div className='container'>
-        <NavBar />
-        
-      <div id='users' >
+    <div className='container'>
+      <NavBar />
+      <div id='users'>
         {users.map(user => (
-            <UserCard
+          <UserCard
             key={user.id}
+            id={user.id}
             login={user.login}
             avatar_url={user.avatar_url}
-            profileLink={`/user/${user.login}`} id={0}            />
+            profileLink={`/user/${user.login}`}
+            favorite={isFavorite(user.login)}
+            onFavoriteToggle={() => toggleFavorite(user.login)}
+          />
         ))}
       </div>
-        
-      <div className='pagenation'>
+      <div className='pagination'>
         <button id='prev' onClick={handlePrev} disabled={since === 0}>Prev</button>
         <button id='next' onClick={handleNext}>Next</button>
       </div>
     </div>
   );
-}
+};
+
+export default HomePage;
