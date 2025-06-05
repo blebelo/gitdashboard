@@ -1,0 +1,29 @@
+img {
+    max-width: 12rem;
+}
+
+a {
+    color:white;
+    padding: 0.4rem;
+    background-color: #7b6ef1;
+    border-radius: 0.5rem;
+    margin: 2rem;
+    text-align: center;
+    transition: transform 0.5 ease;
+}
+
+a :hover {
+    transform: scale(1.05);
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+    
+    width: 100%;
+}
+
+.buttons img {
+    height: 2rem;
+    color: #7b6ef1;
+}
