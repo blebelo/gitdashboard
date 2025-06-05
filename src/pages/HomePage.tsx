@@ -21,6 +21,7 @@ export default function HomePage() {
         setUsers(data);
       } catch (err: any) {
         setError(err.message);
+        console.log(error);
       }
     };
 
