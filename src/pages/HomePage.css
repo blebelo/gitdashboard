@@ -18,7 +18,7 @@
 }
 
 #users::-webkit-scrollbar-thumb:hover {
-    background: #7b6ef1; /
+    background: #7b6ef1; 
 }
 
 #users {
@@ -38,8 +38,4 @@
     border-radius: 1rem;
     padding: 0.5rem;   
     justify-items: center;
-}
-
-#prev {
-    color
 }
