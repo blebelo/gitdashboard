@@ -1,0 +1,30 @@
+.profile-container {
+    justify-items: center;
+}
+
+.profile-card {
+    background-color: lavender;
+    padding: 3rem;
+    width: 50vw;
+    border-radius: 1rem;
+}
+
+ul {
+    list-style: none;
+}
+
+li {
+    padding: 0.5rem;
+}
+
+.profile-card h2 {
+    font-size: 2rem;
+    text-decoration:  underline 2px;
+}
+
+.repos {
+    background-color: lavender;
+    padding: 1rem;
+    width: 20vw;
+    border-radius: 0 1rem 0 0 1rem;
+}

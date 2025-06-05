@@ -1,5 +1,5 @@
 .container {
-    height: 100vh
+    height: 100%;
 }
 
 #users::-webkit-scrollbar {
@@ -38,4 +38,16 @@
     border-radius: 1rem;
     padding: 0.5rem;   
     justify-items: center;
+}
+
+#prev {
+    padding: 0.6rem;
+    background-color: #7b6ef1;
+    border-radius:  1rem 0 0 1rem ;
+}
+
+#next {
+    padding: 0.6rem;
+    background-color: #7b6ef1;
+    border-radius: 0 1rem 1rem 0 ;
 }
