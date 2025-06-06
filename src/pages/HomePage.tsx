@@ -20,17 +20,21 @@ const HomePage = () => {
   useEffect(() => {
     const getUsers = async () => {
       setLoading(true);
-      try {
-        const data = await fetchUsers(since, usersPerPage);
-        setUsers(data);
-      } catch (err: any) {
-        setError(err.message ?? "Something went wrong");
-      } finally {
-        setLoading(false);
-      }
+      processUsers();
     };
     getUsers();
   }, [since]);
+//This asshole di
+  const processUsers = async () => {
+    try {
+      const data = await fetchUsers(since, usersPerPage);
+      setUsers(data);
+    } catch (err: any) {
+      setError(err.message ?? "Something went wrong");
+    } finally {
+      setLoading(false);
+    }
+  }
 
   const handleNext = () => {
     if (users.length > 0) {

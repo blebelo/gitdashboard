@@ -48,9 +48,9 @@ return (
       <div className="profile-card">
         <img src={user?.avatar_url} alt="avatar" className="avatar" />
         <div>
-          <h2>{user.name}</h2>
-          <p>@{user.login}</p>
-          <p>{user.bio}</p>
+          <h2>{user?.name}</h2>
+          <p>@{user?.login}</p>
+          <p>{user?.bio}</p>
           <p><strong>Location:</strong> {user?.location || 'N/A'}</p>
           <p><strong>Followers:</strong> {user?.followers} | <strong>Following:</strong> {user?.following}</p>
           <p><strong>Public Repos:</strong> {user?.public_repos}</p>
